@@ -124,7 +124,12 @@ img {
   align-items: center;
   justify-content: space-between;
   gap: 20px;
-  padding: 22px clamp(20px, 5vw, 64px);
+  /* На телефоне с вырезом/статус-баром (viewport-fit=cover в HTML)
+     страница рисуется под ним — без этой добавки сверху оставалась
+     полоска фона страницы, а не шапки, пока листаешь. env(...) — это
+     отступ под сам вырез/статус-бар, на обычных экранах он равен 0,
+     ничего не меняется. */
+  padding: calc(22px + env(safe-area-inset-top, 0px)) clamp(20px, 5vw, 64px) 22px;
   background: rgba(250, 245, 240, 0.85);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
