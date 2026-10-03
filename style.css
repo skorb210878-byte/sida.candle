@@ -606,13 +606,13 @@ img {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  margin-bottom: 12px;
 }
 
 .product__price {
   font-size: 18px;
   font-weight: 600;
   color: var(--pink-deep);
+  margin-bottom: 12px;
 }
 
 /* --- Выбор запаха: кнопка справа от цены, список выпадает под ней --- */
