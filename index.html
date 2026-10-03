@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SiDa Candle — свечи и декор ручной работы</title>
+
+  <!-- Простая иконка вкладки — сердечко в цвет сайта, без отдельного
+       файла картинки (SVG прямо в ссылке) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23c97b7f' d='M12 21s-7.5-4.6-10-9.3C0.3 8.4 2 5 5.5 5 8 5 10 6.6 12 9.5 14 6.6 16 5 18.5 5 22 5 23.7 8.4 22 11.7 19.5 16.4 12 21 12 21Z'/%3E%3C/svg%3E">
+
+  <!-- Cormorant Garamond — для заголовков (лёгкий, камерный шрифт,
+       подходит ручной работе больше, чем жирный спортивный или
+       геометричный шрифт), Montserrat — для текста -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ==========================================================
+       ШАПКА
+       ========================================================== -->
+  <header class="topbar">
+    <span class="topbar__mark">SiDa <span>Candle</span></span>
+    <nav class="topbar__nav">
+      <a href="#catalog">Каталог</a>
+      <a href="#about">О мастере</a>
+      <a href="#contacts">Контакты</a>
+    </nav>
+    <div class="topbar__links">
+      <a href="https://t.me/anastexxx" target="_blank" rel="noopener" class="btn btn--small btn--icon">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 4 3 11l6 2 2 6 3-4 5 3Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M9 13l9-7" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+        Telegram
+      </a>
+      <a href="https://max.ru/u/f9LHodD0cOLWn0wAa0ka9zTOS3oyFRQGdNlT3SwSWHForhKJPjMu4NOihv0" target="_blank" rel="noopener" class="btn btn--small btn--icon">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4a8 8 0 0 0-8 8 7.8 7.8 0 0 0 1.8 5L5 20l3.3-1.5A8 8 0 1 0 12 4Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        MAX
+      </a>
+    </div>
+  </header>
+
+  <!-- ==========================================================
+       1. HERO
+       ========================================================== -->
+  <section class="hero">
+    <!-- декоративные веточки — в духе сухоцветов с настоящих фото товаров,
+         не случайный клипарт -->
+    <!-- Левая веточка растёт снизу вверх, с розочками (несколько слоёв
+         лепестков вместо одного плоского кружка) и парой листиков -->
+    <svg class="hero__sprig hero__sprig--left" viewBox="0 0 140 220" aria-hidden="true">
+      <path d="M70 220 C 65 160, 75 120, 68 60" fill="none" stroke="#b08968" stroke-width="2"/>
+      <path d="M68 150 C 50 140, 40 120, 45 105" fill="none" stroke="#b08968" stroke-width="1.5"/>
+      <path d="M68 110 C 85 100, 95 85, 92 70" fill="none" stroke="#b08968" stroke-width="1.5"/>
+      <!-- листики -->
+      <ellipse cx="50" cy="128" rx="9" ry="4" fill="#9fb88a" transform="rotate(-30 50 128)"/>
+      <ellipse cx="88" cy="92" rx="9" ry="4" fill="#9fb88a" transform="rotate(35 88 92)"/>
+      <!-- розочка покрупнее, на самом верху стебля -->
+      <g transform="translate(68 56)">
+        <circle cx="0" cy="4" r="7" fill="#c97b7f"/>
+        <circle cx="-5" cy="0" r="5.5" fill="#dca0a3"/>
+        <circle cx="5" cy="0" r="5.5" fill="#dca0a3"/>
+        <circle cx="0" cy="-5" r="5" fill="#e7b9ba"/>
+        <circle cx="0" cy="1" r="3" fill="#f0cdce"/>
+      </g>
+      <!-- розочка поменьше, в стороне -->
+      <g transform="translate(92 68) scale(0.7)">
+        <circle cx="0" cy="4" r="7" fill="#c97b7f"/>
+        <circle cx="-5" cy="0" r="5.5" fill="#dca0a3"/>
+        <circle cx="5" cy="0" r="5.5" fill="#dca0a3"/>
+        <circle cx="0" cy="-5" r="5" fill="#e7b9ba"/>
+      </g>
+      <g transform="translate(45 103) scale(0.55)">
+        <circle cx="0" cy="4" r="7" fill="#dca0a3"/>
+        <circle cx="-5" cy="0" r="5.5" fill="#e7b9ba"/>
+        <circle cx="5" cy="0" r="5.5" fill="#e7b9ba"/>
+      </g>
+    </svg>
+
+    <!-- Правая веточка теперь свисает сверху вниз, как плющ на стене —
+         по просьбе перенёс её из "растёт снизу" в "висит сверху" -->
+    <svg class="hero__sprig hero__sprig--right" viewBox="0 0 140 220" aria-hidden="true">
+      <path d="M70 0 C 75 60, 65 110, 72 160" fill="none" stroke="#b08968" stroke-width="2"/>
+      <path d="M72 70 C 90 80, 100 100, 95 115" fill="none" stroke="#b08968" stroke-width="1.5"/>
+      <path d="M72 110 C 55 120, 45 135, 48 150" fill="none" stroke="#b08968" stroke-width="1.5"/>
+      <ellipse cx="88" cy="96" rx="9" ry="4" fill="#9fb88a" transform="rotate(30 88 96)"/>
+      <ellipse cx="50" cy="140" rx="9" ry="4" fill="#9fb88a" transform="rotate(-35 50 140)"/>
+      <g transform="translate(72 162)">
+        <circle cx="0" cy="4" r="7" fill="#c97b7f"/>
+        <circle cx="-5" cy="0" r="5.5" fill="#dca0a3"/>
+        <circle cx="5" cy="0" r="5.5" fill="#dca0a3"/>
+        <circle cx="0" cy="-5" r="5" fill="#e7b9ba"/>
+        <circle cx="0" cy="1" r="3" fill="#f0cdce"/>
+      </g>
+      <g transform="translate(95 115) scale(0.7)">
+        <circle cx="0" cy="4" r="7" fill="#c97b7f"/>
+        <circle cx="-5" cy="0" r="5.5" fill="#dca0a3"/>
+        <circle cx="5" cy="0" r="5.5" fill="#dca0a3"/>
+        <circle cx="0" cy="-5" r="5" fill="#e7b9ba"/>
+      </g>
+      <g transform="translate(48 150) scale(0.55)">
+        <circle cx="0" cy="4" r="7" fill="#dca0a3"/>
+        <circle cx="-5" cy="0" r="5.5" fill="#e7b9ba"/>
+        <circle cx="5" cy="0" r="5.5" fill="#e7b9ba"/>
+      </g>
+    </svg>
+
+    <!-- милые сердечки — просто декор, парят медленно и еле заметно -->
+    <svg class="heart heart--1" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-10-9.3C0.3 8.4 2 5 5.5 5 8 5 10 6.6 12 9.5 14 6.6 16 5 18.5 5 22 5 23.7 8.4 22 11.7 19.5 16.4 12 21 12 21Z"/></svg>
+    <svg class="heart heart--2" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-10-9.3C0.3 8.4 2 5 5.5 5 8 5 10 6.6 12 9.5 14 6.6 16 5 18.5 5 22 5 23.7 8.4 22 11.7 19.5 16.4 12 21 12 21Z"/></svg>
+    <svg class="heart heart--3" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-10-9.3C0.3 8.4 2 5 5.5 5 8 5 10 6.6 12 9.5 14 6.6 16 5 18.5 5 22 5 23.7 8.4 22 11.7 19.5 16.4 12 21 12 21Z"/></svg>
+    <svg class="heart heart--4" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-10-9.3C0.3 8.4 2 5 5.5 5 8 5 10 6.6 12 9.5 14 6.6 16 5 18.5 5 22 5 23.7 8.4 22 11.7 19.5 16.4 12 21 12 21Z"/></svg>
+    <svg class="heart heart--5" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-10-9.3C0.3 8.4 2 5 5.5 5 8 5 10 6.6 12 9.5 14 6.6 16 5 18.5 5 22 5 23.7 8.4 22 11.7 19.5 16.4 12 21 12 21Z"/></svg>
+    <svg class="heart heart--6" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-10-9.3C0.3 8.4 2 5 5.5 5 8 5 10 6.6 12 9.5 14 6.6 16 5 18.5 5 22 5 23.7 8.4 22 11.7 19.5 16.4 12 21 12 21Z"/></svg>
+
+    <div class="hero__inner">
+      <p class="hero__eyebrow">Ручная работа · гипс и воск</p>
+      <h1 class="hero__title">SiDa <span>Candle</span></h1>
+      <p class="hero__tagline">Свечи и гипсовый декор, которые делают вручную — маленькими партиями, с настроением и вниманием к мелочам</p>
+      <a href="#catalog" class="btn btn--primary">Смотреть каталог</a>
+    </div>
+  </section>
+
+  <!-- ==========================================================
+       2. КАТАЛОГ
+       ========================================================== -->
+  <section class="section" id="catalog">
+    <div class="section__inner">
+      <span class="section__kicker">Ручная работа, маленькими партиями</span>
+      <h2 class="section__title">Каталог</h2>
+
+      <div class="products">
+
+        <!-- ---------- Свеча №1 ---------- -->
+        <article class="product" data-base-order="Здравствуйте! Хочу заказать: Гипсовый набор с золотой поталью (900 ₽)">
+          <div class="product__gallery">
+            <!-- ЧТОБЫ ДОБАВИТЬ ФОТО: скопируй одну строку "product__slide" ниже,
+                 поменяй имя файла в url('images/...') и текст в aria-label.
+                 ЧТОБЫ ПОМЕНЯТЬ ФОТО: просто замени имя файла в нужной строке. -->
+            <div class="product__slides">
+              <div class="product__slide is-active" style="background-image:url('images/svecha1.jpg')" role="img" aria-label="Гипсовый набор с золотой поталью — поднос, шкатулка и ваза, фото 1"></div>
+              <div class="product__slide" style="background-image:url('images/svecha1.2.jpg')" role="img" aria-label="Гипсовый набор с золотой поталью — поднос, шкатулка и ваза, фото 2"></div>
+              <div class="product__slide" style="background-image:url('images/svecha1.3.jpg')" role="img" aria-label="Гипсовый набор с золотой поталью — поднос, шкатулка и ваза, фото 3"></div>
+            </div>
+            <button type="button" class="product__arrow product__arrow--prev" aria-label="Предыдущее фото">&#10094;</button>
+            <button type="button" class="product__arrow product__arrow--next" aria-label="Следующее фото">&#10095;</button>
+            <div class="product__dots"></div>
+          </div>
+          <div class="product__info">
+            <h3 class="product__name">Гипсовый набор с золотой поталью</h3>
+            <div class="product__price-row">
+              <p class="product__price">900 ₽</p>
+              <div class="product__scent">
+              <button type="button" class="product__scent-toggle">Выбрать запах</button>
+              <div class="product__scent-list">
+                <button type="button" class="scent-option" data-scent="Синнабон">Синнабон</button>
+                <button type="button" class="scent-option" data-scent="Попкорн">Попкорн</button>
+                <button type="button" class="scent-option" data-scent="Бананово-ореховый хлеб">Бананово-ореховый хлеб</button>
+                <button type="button" class="scent-option" data-scent="Солёная карамель">Солёная карамель</button>
+                <button type="button" class="scent-option" data-scent="Тыква-карамель">Тыква-карамель</button>
+                <button type="button" class="scent-option" data-scent="Малина-ваниль">Малина-ваниль</button>
+              </div>
+            </div>
+            </div>
+            <p class="product__desc">В набор входят поднос, шкатулка и ваза — все предметы отлиты из гипса вручную и покрыты золотой поталью. Сухоцветы на фото — для оформления, в стоимость не входят.</p>
+            <p class="product__meta">Время изготовления — ~7 дней</p>
+            <button type="button" class="product__buy">Заказать</button>
+          </div>
+        </article>
+
+        <!-- ---------- Свеча №2 — два варианта: шкатулка / свеча ---------- -->
+        <article class="product" data-base-order="Здравствуйте! Хочу заказать: Шкатулка-карусель «Любовь с первого взгляда» (650 ₽)">
+          <div class="product__gallery">
+            <!-- ЧТОБЫ ДОБАВИТЬ ФОТО: скопируй одну строку "product__slide" ниже,
+                 поменяй имя файла в url('images/...') и текст в aria-label.
+                 ЧТОБЫ ПОМЕНЯТЬ ФОТО: просто замени имя файла в нужной строке. -->
+            <div class="product__slides">
+              <div class="product__slide is-active" style="background-image:url('images/svecha2.jpg')" role="img" aria-label="Шкатулка-карусель «Любовь с первого взгляда», розовая и белая, фото 1"></div>
+              <div class="product__slide" style="background-image:url('images/svecha2.1.jpg')" role="img" aria-label="Шкатулка-карусель «Любовь с первого взгляда», розовая и белая, фото 2"></div>
+            </div>
+            <button type="button" class="product__arrow product__arrow--prev" aria-label="Предыдущее фото">&#10094;</button>
+            <button type="button" class="product__arrow product__arrow--next" aria-label="Следующее фото">&#10095;</button>
+            <div class="product__dots"></div>
+          </div>
+          <div class="product__info">
+            <h3 class="product__name">Любовь с первого взгляда</h3>
+            <div class="product__price-row">
+              <p class="product__price">650 ₽</p>
+              <div class="product__scent">
+              <button type="button" class="product__scent-toggle">Выбрать запах</button>
+              <div class="product__scent-list">
+                <button type="button" class="scent-option" data-scent="Синнабон">Синнабон</button>
+                <button type="button" class="scent-option" data-scent="Попкорн">Попкорн</button>
+                <button type="button" class="scent-option" data-scent="Бананово-ореховый хлеб">Бананово-ореховый хлеб</button>
+                <button type="button" class="scent-option" data-scent="Солёная карамель">Солёная карамель</button>
+                <button type="button" class="scent-option" data-scent="Тыква-карамель">Тыква-карамель</button>
+                <button type="button" class="scent-option" data-scent="Малина-ваниль">Малина-ваниль</button>
+              </div>
+            </div>
+            </div>
+            <p class="product__desc">Шкатулка в виде карусели с рельефными лошадками, расписана вручную серебром или золотом на выбор.</p>
+
+            <!-- переключатель варианта — без него цена и кнопка "Заказать"
+                 не поменяются; не убирай data-атрибуты у кнопок -->
+            <div class="product__variants">
+              <button type="button" class="variant is-active" data-price="650 ₽" data-label="Шкатулка (без свечи)" data-order="Здравствуйте! Хочу заказать: Шкатулка-карусель «Любовь с первого взгляда» (650 ₽)" data-has-scent="false">Шкатулка</button>
+              <button type="button" class="variant" data-price="900 ₽" data-label="Свеча" data-order="Здравствуйте! Хочу заказать: Свеча-карусель «Любовь с первого взгляда» (900 ₽)" data-has-scent="true">Свеча</button>
+            </div>
+
+            <p class="product__meta">Время изготовления — ~7 дней</p>
+            <button type="button" class="product__buy">Заказать</button>
+          </div>
+        </article>
+
+        <!-- ---------- Свеча №3 — название придумывает Никита с сестрой ---------- -->
+        <article class="product" data-base-order="Здравствуйте! Хочу заказать: Свеча-тыква (1300 ₽)">
+          <div class="product__gallery">
+            <!-- ЧТОБЫ ДОБАВИТЬ ФОТО: скопируй одну строку "product__slide" ниже,
+                 поменяй имя файла в url('images/...') и текст в aria-label.
+                 ЧТОБЫ ПОМЕНЯТЬ ФОТО: просто замени имя файла в нужной строке. -->
+            <div class="product__slides">
+              <div class="product__slide is-active" style="background-image:url('images/svecha3.jpg')" role="img" aria-label="Декоративная свеча в виде тыквы с золотым листом, фото 1"></div>
+              <div class="product__slide" style="background-image:url('images/svecha3.1.jpg')" role="img" aria-label="Декоративная свеча в виде тыквы с золотым листом, фото 2"></div>
+              <div class="product__slide" style="background-image:url('images/svecha3.2.jpg')" role="img" aria-label="Декоративная свеча в виде тыквы с золотым листом, фото 3"></div>
+            </div>
+            <button type="button" class="product__arrow product__arrow--prev" aria-label="Предыдущее фото">&#10094;</button>
+            <button type="button" class="product__arrow product__arrow--next" aria-label="Следующее фото">&#10095;</button>
+            <div class="product__dots"></div>
+          </div>
+          <div class="product__info">
+            <!-- ЗАМЕНИ НА НАЗВАНИЕ, КОТОРОЕ ПРИДУМАЕТЕ С АНАСТАСИЕЙ -->
+            <h3 class="product__name">Свеча-тыква</h3>
+            <div class="product__price-row">
+              <p class="product__price">1 300 ₽</p>
+              <div class="product__scent">
+              <button type="button" class="product__scent-toggle">Выбрать запах</button>
+              <div class="product__scent-list">
+                <button type="button" class="scent-option" data-scent="Синнабон">Синнабон</button>
+                <button type="button" class="scent-option" data-scent="Попкорн">Попкорн</button>
+                <button type="button" class="scent-option" data-scent="Бананово-ореховый хлеб">Бананово-ореховый хлеб</button>
+                <button type="button" class="scent-option" data-scent="Солёная карамель">Солёная карамель</button>
+                <button type="button" class="scent-option" data-scent="Тыква-карамель">Тыква-карамель</button>
+                <button type="button" class="scent-option" data-scent="Малина-ваниль">Малина-ваниль</button>
+              </div>
+            </div>
+            </div>
+            <!-- ЧЕРНОВИК ОПИСАНИЯ — ПОДГОНИТЕ ПОД РЕАЛЬНЫЙ СОСТАВ/РАЗМЕР -->
+            <p class="product__desc">Декоративная свеча в виде тыквы с кленовым листом цвета золота на крышке. Внутри — чайная свеча; когда она прогорит, тыкву можно использовать как шкатулку для мелочей.</p>
+            <p class="product__meta">Время изготовления — ~7 дней</p>
+            <button type="button" class="product__buy">Заказать</button>
+          </div>
+        </article>
+
+        <!-- ---------- Свеча №4 ---------- -->
+        <article class="product" data-base-order="Здравствуйте! Хочу заказать: Ice Matcha Latte 200мл (1100 ₽)">
+          <div class="product__gallery">
+            <!-- ЧТОБЫ ДОБАВИТЬ ФОТО: скопируй одну строку "product__slide" ниже,
+                 поменяй имя файла в url('images/...') и текст в aria-label.
+                 ЧТОБЫ ПОМЕНЯТЬ ФОТО: просто замени имя файла в нужной строке. -->
+            <div class="product__slides">
+              <div class="product__slide is-active" style="background-image:url('images/svecha4.jpg')" role="img" aria-label="Свеча Ice Matcha Latte 200мл, две свечи с деревянными крышками, фото 1"></div>
+              <div class="product__slide" style="background-image:url('images/svecha4.1.jpg')" role="img" aria-label="Свеча Ice Matcha Latte 200мл, две свечи с деревянными крышками, фото 2"></div>
+              <div class="product__slide" style="background-image:url('images/svecha4.2.jpg')" role="img" aria-label="Свеча Ice Matcha Latte 200мл, две свечи с деревянными крышками, фото 3"></div>
+              <div class="product__slide" style="background-image:url('images/svecha4.3.jpg')" role="img" aria-label="Свеча Ice Matcha Latte 200мл, две свечи с деревянными крышками, фото 4"></div>
+            </div>
+            <button type="button" class="product__arrow product__arrow--prev" aria-label="Предыдущее фото">&#10094;</button>
+            <button type="button" class="product__arrow product__arrow--next" aria-label="Следующее фото">&#10095;</button>
+            <div class="product__dots"></div>
+          </div>
+          <div class="product__info">
+            <h3 class="product__name">Ice Matcha Latte</h3>
+            <div class="product__price-row">
+              <p class="product__price">1 100 ₽</p>
+              <div class="product__scent">
+              <button type="button" class="product__scent-toggle">Выбрать запах</button>
+              <div class="product__scent-list">
+                <button type="button" class="scent-option" data-scent="Синнабон">Синнабон</button>
+                <button type="button" class="scent-option" data-scent="Попкорн">Попкорн</button>
+                <button type="button" class="scent-option" data-scent="Бананово-ореховый хлеб">Бананово-ореховый хлеб</button>
+                <button type="button" class="scent-option" data-scent="Солёная карамель">Солёная карамель</button>
+                <button type="button" class="scent-option" data-scent="Тыква-карамель">Тыква-карамель</button>
+                <button type="button" class="scent-option" data-scent="Малина-ваниль">Малина-ваниль</button>
+              </div>
+            </div>
+            </div>
+            <!-- ЧЕРНОВИК ОПИСАНИЯ -->
+            <p class="product__desc">Свеча в стеклянном стакане с эффектом ледяного матча-латте — воск уложен слоями, имитируя кубики льда. Объём 200 мл, в комплекте деревянная крышка.</p>
+            <p class="product__meta">Время изготовления — ~7 дней</p>
+            <button type="button" class="product__buy">Заказать</button>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================
+       3. О МАСТЕРЕ
+       ========================================================== -->
+  <section class="section section--alt" id="about">
+    <div class="section__inner section__inner--narrow">
+      <span class="section__kicker">Пара слов</span>
+      <h2 class="section__title">О мастере</h2>
+      <!-- ЗАМЕНИ НА НАСТОЯЩИЙ ТЕКСТ ОТ АНАСТАСИИ, КОГДА БУДЕТ ГОТОВ -->
+      <p class="about-text draft-text">
+        Анастасия делает свечи и гипсовый декор вручную, маленькими партиями —
+        каждая вещь проходит через её руки от заливки до упаковки. Здесь
+        появится её история: почему именно свечи и что для неё значит эта работа.
+      </p>
+    </div>
+  </section>
+
+  <!-- ==========================================================
+       4. КОНТАКТЫ
+       ========================================================== -->
+  <section class="section" id="contacts">
+    <div class="section__inner section__inner--narrow contacts">
+      <span class="section__kicker">Как заказать</span>
+      <h2 class="section__title">Контакты</h2>
+      <p class="contacts__text">Все заказы — через Telegram: напишите, какая свеча понравилась, и договоримся об оплате и доставке.</p>
+
+      <div class="contacts__buttons">
+        <a href="https://t.me/anastexxx" target="_blank" rel="noopener" class="btn btn--primary btn--telegram">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 4 3 11l6 2 2 6 3-4 5 3Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M9 13l9-7" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+          Написать в Telegram
+        </a>
+        <a href="https://max.ru/u/f9LHodD0cOLWn0wAa0ka9zTOS3oyFRQGdNlT3SwSWHForhKJPjMu4NOihv0" target="_blank" rel="noopener" class="btn btn--primary btn--telegram">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4a8 8 0 0 0-8 8 7.8 7.8 0 0 0 1.8 5L5 20l3.3-1.5A8 8 0 1 0 12 4Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+          Написать в MAX
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>© 2026 SiDa Candle — ручная работа</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

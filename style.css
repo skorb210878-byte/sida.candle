@@ -1,0 +1,796 @@
+/* ==========================================================================
+   ПЕРЕМЕННЫЕ
+   ========================================================================== */
+
+:root {
+  --bg: #faf5f0;
+  --bg-card: #ffffff;
+  --bg-alt: #f3e9e1;
+
+  --text: #3c2f28;
+  --text-dim: #8a776b;
+
+  --beige: #d9c3ac;
+  --pink: #e7b9ba;
+  --pink-deep: #c97b7f;
+  --berry: #a84448; /* тот самый "местами красненький" — используем скупо */
+
+  --line: rgba(60, 47, 40, 0.1);
+
+  --font-display: 'Cormorant Garamond', serif;
+  --font-text: 'Montserrat', sans-serif;
+}
+
+/* ==========================================================================
+   БАЗОВЫЕ СБРОСЫ
+   ========================================================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Полосу прокрутки совсем убрать нельзя — это стандартный элемент
+     браузера, без неё сложно понять, где находишься на длинной странице.
+     Вместо этого красим её в тон сайту (розовый). Firefox: */
+  scrollbar-color: var(--pink-deep) var(--bg-alt);
+  scrollbar-width: thin;
+}
+
+/* Та же покраска для Chrome/Edge/Safari (у них свой синтаксис) */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-alt);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--pink-deep);
+  border-radius: 999px;
+  border: 2px solid var(--bg-alt);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--berry);
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-text);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Черновые плейсхолдеры — видно с первого взгляда, что нужно заменить,
+   но не выглядит как сломанная вёрстка */
+.draft-tag {
+  display: inline-block;
+  font-family: var(--font-text);
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--berry);
+  background: rgba(168, 68, 72, 0.08);
+  border: 1px dashed var(--berry);
+  padding: 2px 8px;
+  border-radius: 999px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+.draft-text {
+  /* Было dashed — по просьбе сделал сплошной линией (пунктир остаётся
+     только у кнопок-заглушек через .btn--draft) */
+  border-left: 2px solid var(--pink-deep);
+  padding-left: 12px;
+  color: var(--text-dim);
+}
+
+/* Для кнопок черновая рамка по левому краю не подходит (ломает форму
+   пилюли) — вместо этого вся кнопка пунктирная, пока не вставлена
+   настоящая ссылка */
+.btn--draft {
+  border-style: dashed !important;
+  opacity: 0.7;
+}
+
+/* ==========================================================================
+   ШАПКА
+   ========================================================================== */
+
+.topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 22px clamp(20px, 5vw, 64px);
+  background: rgba(250, 245, 240, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+
+.topbar__mark {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 22px;
+  letter-spacing: 0.01em;
+}
+
+/* Тот же приём, что и в заголовке на главном экране — вторая часть
+   названия курсивом и розовым */
+.topbar__mark span {
+  font-style: italic;
+  color: var(--pink-deep);
+}
+
+.topbar__nav {
+  display: flex;
+  gap: clamp(16px, 3vw, 32px);
+}
+
+.topbar__links {
+  display: flex;
+  gap: 10px;
+}
+
+.topbar__nav a {
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--text-dim);
+  transition: color 0.25s ease;
+}
+
+.topbar__nav a:hover,
+.topbar__nav a:focus-visible {
+  color: var(--berry);
+}
+
+/* ==========================================================================
+   КНОПКИ
+   ========================================================================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 34px;
+  border-radius: 999px;
+  font-family: var(--font-text);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+}
+
+.btn--primary {
+  background: var(--pink-deep);
+  color: #fff;
+}
+
+.btn--primary:hover,
+.btn--primary:focus-visible {
+  transform: translateY(-2px);
+  background: var(--berry);
+}
+
+.btn--small {
+  padding: 9px 20px;
+  font-size: 12px;
+  border-color: var(--pink-deep);
+  color: var(--pink-deep);
+  background: transparent;
+}
+
+.btn--small:hover,
+.btn--small:focus-visible {
+  background: rgba(201, 123, 127, 0.1);
+}
+
+.btn--telegram svg {
+  width: 18px;
+  height: 18px;
+}
+
+.btn--icon svg {
+  width: 15px;
+  height: 15px;
+}
+
+/* ==========================================================================
+   1. HERO
+   ========================================================================== */
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 100px 20px 0;
+  background: radial-gradient(ellipse 80% 60% at 50% 20%, var(--bg-alt) 0%, var(--bg) 70%);
+}
+
+.hero__sprig {
+  position: absolute;
+  width: clamp(80px, 9vw, 140px);
+  height: auto;
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+.hero__sprig--left {
+  left: clamp(16px, 4vw, 64px);
+  bottom: 0;
+  transform-origin: bottom center; /* растёт от низа экрана вверх */
+  animation: swayLeft 7s ease-in-out infinite;
+}
+
+.hero__sprig--right {
+  /* Была внизу (зеркальной копией левой) — по просьбе перенёс наверх,
+     теперь это отдельная веточка, свисающая сверху вниз, как плющ */
+  right: clamp(16px, 4vw, 64px);
+  top: 0;
+  transform-origin: top center;
+  animation: swayRight 7s ease-in-out infinite;
+  animation-delay: 1.2s; /* чуть вразнобой с левой, чтобы не качались синхронно */
+}
+
+/* Еле заметное покачивание, как от сквозняка — не анимация ради анимации */
+@keyframes swayLeft {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(2.5deg); }
+}
+
+@keyframes swayRight {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(-2.5deg); }
+}
+
+/* Милые сердечки — медленно всплывают и тают, по одному за раз */
+.heart {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  fill: var(--pink);
+  opacity: 0;
+  pointer-events: none;
+  animation: floatHeart 9s ease-in infinite;
+}
+
+.heart--1 {
+  left: 18%;
+  bottom: 10%;
+  animation-delay: 0s;
+}
+
+.heart--2 {
+  right: 22%;
+  bottom: 18%;
+  width: 12px;
+  height: 12px;
+  animation-delay: 3s;
+}
+
+.heart--3 {
+  left: 38%;
+  bottom: 6%;
+  width: 13px;
+  height: 13px;
+  animation-delay: 6s;
+}
+
+/* Было 3 сердечка — по просьбе добавил ещё 3, больше по количеству,
+   а не по размеру */
+.heart--4 {
+  right: 12%;
+  bottom: 4%;
+  width: 11px;
+  height: 11px;
+  animation-delay: 1.5s;
+}
+
+.heart--5 {
+  left: 8%;
+  bottom: 22%;
+  width: 14px;
+  height: 14px;
+  animation-delay: 4.5s;
+}
+
+.heart--6 {
+  right: 36%;
+  bottom: 12%;
+  width: 12px;
+  height: 12px;
+  animation-delay: 7.5s;
+}
+
+@keyframes floatHeart {
+  /* Было -90px — едва успевали оторваться от низа экрана. Теперь плывут
+     почти до самого верха главного экрана. */
+  0% { opacity: 0; transform: translateY(0) scale(0.8); }
+  15% { opacity: 0.7; }
+  85% { opacity: 0.4; }
+  100% { opacity: 0; transform: translateY(-85vh) scale(1); }
+}
+
+@media (max-width: 760px) {
+  /* Были скрыты на телефоне — по просьбе оставляем, но делаем компактнее,
+     чтобы не спорили с текстом на узком экране */
+  .hero__sprig {
+    width: 56px;
+  }
+
+  .hero__sprig--left {
+    left: 8px;
+  }
+
+  .hero__sprig--right {
+    right: 8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__sprig,
+  .heart {
+    animation: none;
+  }
+}
+
+.hero__inner {
+  max-width: 620px;
+  position: relative;
+  z-index: 1;
+}
+
+.hero__eyebrow {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--pink-deep);
+  margin-bottom: 18px;
+}
+
+.hero__title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(56px, 10vw, 104px);
+  line-height: 1;
+  margin-bottom: 22px;
+}
+
+.hero__title span {
+  font-style: italic;
+  color: var(--pink-deep);
+}
+
+.hero__tagline {
+  font-size: clamp(15px, 1.8vw, 18px);
+  color: var(--text-dim);
+  max-width: 44ch;
+  margin: 0 auto 36px;
+}
+
+/* ==========================================================================
+   ОБЩИЕ СЕКЦИИ + ПОЯВЛЕНИЕ ПРИ СКРОЛЛЕ
+   ========================================================================== */
+
+.section {
+  padding: clamp(72px, 10vw, 120px) clamp(20px, 6vw, 72px);
+}
+
+.section--alt {
+  background: var(--bg-alt);
+}
+
+.section__inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.section__inner--narrow {
+  max-width: 620px;
+}
+
+.section__kicker {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--pink-deep);
+  margin-bottom: 10px;
+}
+
+.section__title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(32px, 4vw, 46px);
+  margin-bottom: clamp(36px, 5vw, 56px);
+}
+
+.section,
+.hero__inner {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.75s ease, transform 0.75s ease;
+}
+
+.hero__inner {
+  opacity: 1;
+  transform: none;
+}
+
+.section.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section {
+    transition: none;
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ==========================================================================
+   2. КАТАЛОГ
+   ========================================================================== */
+
+.products {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(28px, 4vw, 44px);
+}
+
+.product {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- Фото в карточке: одно статичное изображение, без переключения --- */
+
+.product__gallery {
+  position: relative;
+}
+
+.product__slides {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  background: var(--bg-alt); /* видно только долю секунды, пока фото не загрузилось */
+  border: 2px solid var(--pink-deep);
+  border-radius: 6px 6px 0 0;
+  overflow: hidden;
+}
+
+/* Фото рисуется через background-image на обычном div, а не через <img>.
+   Так надёжнее переключать кадры (меньше шансов что-то сломать), и заодно
+   решает жалобу на всплывающие значки Яндекс.Браузера при наведении —
+   они цепляются именно к тегу <img>, а не к фону. */
+/* Откатил последний шаг (размытую подложку через ::before/::after) —
+   ломала переключение фото. Пока просто cover: рамки у всех карточек
+   одинакового размера и формы (это даёт общее правило у .product__slides
+   ниже), фото может немного обрезаться по краям — вернёмся к показу
+   целиком отдельным, более аккуратным шагом позже. */
+.product__slide {
+  position: absolute;
+  inset: 0;
+  /* Было contain — часть фото портретные (вертикальные), часть
+     альбомные (горизонтальные), и contain оставлял по бокам пустые
+     поля разной ширины — отсюда и разнобой "эта вертикальная, эта
+     горизонтальная". cover заполняет рамку целиком у всех одинаково,
+     независимо от формы исходного фото — консистентность важнее, чем
+     чтобы каждый кадр был виден идеально целиком. */
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.product__slide.is-active {
+  opacity: 1;
+}
+
+.product__arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid rgba(60, 47, 40, 0.1);
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 2px 8px rgba(60, 47, 40, 0.18);
+  color: var(--berry);
+  font-size: 13px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.25s ease, transform 0.2s ease;
+}
+
+.product__arrow:hover,
+.product__arrow:focus-visible {
+  background: #fff;
+}
+
+.product__arrow--prev {
+  left: 10px;
+}
+
+.product__arrow--next {
+  right: 10px;
+}
+
+.product__dots {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 12px;
+  display: flex;
+  justify-content: center;
+  gap: 7px;
+}
+
+.product__dots button {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.55);
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.product__dots button.is-active {
+  background: #fff;
+  transform: scale(1.3);
+}
+
+/* --- Текстовая часть карточки --- */
+
+.product__info {
+  padding: 24px 24px 28px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.product__name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 23px;
+  margin-bottom: 6px;
+}
+
+.product__price-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.product__price {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--pink-deep);
+}
+
+/* --- Выбор запаха: кнопка справа от цены, список выпадает под ней --- */
+
+.product__scent {
+  position: relative;
+}
+
+.product__scent-toggle {
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--pink-deep);
+  background: transparent;
+  color: var(--pink-deep);
+  font-family: var(--font-text);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+.product__scent-toggle:hover,
+.product__scent-toggle:focus-visible {
+  background: var(--pink-deep);
+  color: #fff;
+}
+
+.product__scent-list {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  min-width: 190px;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: 0 10px 28px rgba(60, 47, 40, 0.14);
+  padding: 6px;
+  /* Список спрятан по умолчанию — открывается через .is-open на
+     родителе .product__scent, когда нажали "Выбрать запах" */
+  opacity: 0;
+  transform: translateY(-6px);
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.product__scent.is-open .product__scent-list {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
+.scent-option {
+  padding: 9px 10px;
+  border: none;
+  border-radius: 5px;
+  background: transparent;
+  color: var(--text);
+  font-family: var(--font-text);
+  font-size: 13px;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.scent-option:hover,
+.scent-option:focus-visible {
+  background: var(--bg-alt);
+}
+
+.scent-option.is-active {
+  color: var(--pink-deep);
+  font-weight: 600;
+}
+
+.product__desc {
+  font-size: 14px;
+  color: var(--text-dim);
+  margin-bottom: 14px;
+}
+
+.product__variants {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.variant {
+  padding: 7px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: transparent;
+  font-family: var(--font-text);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: border-color 0.25s ease, color 0.25s ease, background 0.25s ease;
+}
+
+.variant.is-active {
+  border-color: var(--pink-deep);
+  color: var(--pink-deep);
+  background: rgba(201, 123, 127, 0.08);
+}
+
+.product__meta {
+  font-size: 12px;
+  color: var(--text-dim);
+  margin-bottom: 18px;
+  margin-top: auto;
+}
+
+.product__buy {
+  width: 100%;
+  padding: 13px;
+  border-radius: 999px;
+  border: 1.5px solid var(--pink-deep);
+  background: #fff;
+  color: var(--pink-deep);
+  font-family: var(--font-text);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease, transform 0.2s ease;
+}
+
+.product__buy:hover,
+.product__buy:focus-visible {
+  background: var(--pink-deep);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   3. О МАСТЕРЕ
+   ========================================================================== */
+
+.about-text {
+  font-size: 17px;
+}
+
+/* ==========================================================================
+   4. КОНТАКТЫ
+   ========================================================================== */
+
+.contacts__text {
+  color: var(--text-dim);
+  margin-bottom: 28px;
+}
+
+.contacts__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+/* ==========================================================================
+   ФУТЕР
+   ========================================================================== */
+
+.footer {
+  padding: 32px 20px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-dim);
+  border-top: 1px solid var(--line);
+}
+
+/* ==========================================================================
+   АДАПТИВ ПОД ТЕЛЕФОН
+   ========================================================================== */
+
+@media (max-width: 760px) {
+  .topbar__nav {
+    display: none;
+  }
+
+  .products {
+    grid-template-columns: 1fr;
+  }
+}
