@@ -19,6 +19,14 @@
 
   --font-display: 'Cormorant Garamond', serif;
   --font-text: 'Montserrat', sans-serif;
+
+  --photo-ratio: 4 / 5;
+}
+
+@media (min-width: 900px) {
+  :root {
+    --photo-ratio: 1 / 1;
+  }
 }
 
 /* ==========================================================================
@@ -468,6 +476,11 @@ img {
    2. КАТАЛОГ
    ========================================================================== */
 
+#catalog {
+  position: relative;
+  z-index: 2;
+}
+
 .products {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -478,58 +491,83 @@ img {
   background: var(--bg-card);
   border: 1px solid var(--line);
   border-radius: 6px;
-  overflow: hidden;
   display: flex;
   flex-direction: column;
+}
+
+/* Карточка с открытым выбором запаха поднимается над соседями по сетке —
+   класс ставит JS, см. script.js */
+.product.has-open-scent {
+  position: relative;
+  z-index: 20;
 }
 
 /* --- Фото в карточке: одно статичное изображение, без переключения --- */
 
 .product__gallery {
   position: relative;
+  isolation: isolate;
 }
 
 .product__slides {
   position: relative;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: var(--photo-ratio);
   background: var(--bg-alt); /* видно только долю секунды, пока фото не загрузилось */
   border: 2px solid var(--pink-deep);
   border-radius: 6px 6px 0 0;
   overflow: hidden;
+  isolation: isolate;
 }
 
-/* Фото рисуется через background-image на обычном div, а не через <img>.
-   Так надёжнее переключать кадры (меньше шансов что-то сломать), и заодно
-   решает жалобу на всплывающие значки Яндекс.Браузера при наведении —
-   они цепляются именно к тегу <img>, а не к фону. */
-/* Откатил последний шаг (размытую подложку через ::before/::after) —
-   ломала переключение фото. Пока просто cover: рамки у всех карточек
-   одинакового размера и формы (это даёт общее правило у .product__slides
-   ниже), фото может немного обрезаться по краям — вернёмся к показу
-   целиком отдельным, более аккуратным шагом позже. */
+/* Фото рисуется через background-image на псевдоэлементах обычного div,
+   а не через <img>. Так надёжнее переключать кадры, и заодно решает
+   жалобу на всплывающие значки Яндекс.Браузера при наведении — они
+   цепляются именно к тегу <img>, а не к фону.
+   Каждый кадр — два слоя одного фото: ::before — размытая растянутая
+   подложка, которая заполняет пустые поля; ::after — чёткое фото целиком
+   (contain), поверх неё. Порядок слоёв задаёт сам DOM (::before раньше
+   ::after), z-index им не нужен. */
 .product__slide {
   position: absolute;
   inset: 0;
-  /* Было contain — часть фото портретные (вертикальные), часть
-     альбомные (горизонтальные), и contain оставлял по бокам пустые
-     поля разной ширины — отсюда и разнобой "эта вертикальная, эта
-     горизонтальная". cover заполняет рамку целиком у всех одинаково,
-     независимо от формы исходного фото — консистентность важнее, чем
-     чтобы каждый кадр был виден идеально целиком. */
-  background-size: cover;
-  background-position: center;
   opacity: 0;
-  transition: opacity 0.4s ease;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0s linear 0.4s;
 }
 
 .product__slide.is-active {
   opacity: 1;
+  visibility: visible;
+  transition: opacity 0.4s ease, visibility 0s linear 0s;
+}
+
+.product__slide::before,
+.product__slide::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: var(--img);
+  pointer-events: none;
+}
+
+.product__slide::before {
+  background-size: cover;
+  background-position: center;
+  filter: blur(24px) brightness(.9);
+  transform: scale(1.15);
+}
+
+.product__slide::after {
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .product__arrow {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
+  z-index: 5;
   width: 34px;
   height: 34px;
   border-radius: 50%;
@@ -564,6 +602,7 @@ img {
   left: 0;
   right: 0;
   bottom: 12px;
+  z-index: 5;
   display: flex;
   justify-content: center;
   gap: 7px;
@@ -649,6 +688,8 @@ img {
   display: flex;
   flex-direction: column;
   min-width: 190px;
+  max-height: 60vh;
+  overflow-y: auto;
   background: var(--bg-card);
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -660,6 +701,18 @@ img {
   transform: translateY(-6px);
   pointer-events: none;
   transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+/* Если сверху кнопки недостаточно места под список (считает JS при
+   открытии), список раскрывается вверх вместо вниз */
+.product__scent-list.is-up {
+  top: auto;
+  bottom: calc(100% + 8px);
+}
+
+.product__scent.is-open {
+  position: relative;
+  z-index: 30;
 }
 
 .product__scent.is-open .product__scent-list {

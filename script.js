@@ -143,8 +143,25 @@ document.querySelectorAll('.product__scent').forEach((scentBlock) => {
   const list = scentBlock.querySelector('.product__scent-list');
   const options = scentBlock.querySelectorAll('.scent-option');
 
+  function openList() {
+    // Если снизу не хватает места под список — раскрываем его вверх
+    const spaceBelow = window.innerHeight - toggle.getBoundingClientRect().bottom;
+    list.classList.toggle('is-up', list.offsetHeight + 16 > spaceBelow);
+    scentBlock.classList.add('is-open');
+    product.classList.add('has-open-scent');
+  }
+
+  function closeList() {
+    scentBlock.classList.remove('is-open');
+    product.classList.remove('has-open-scent');
+  }
+
   toggle.addEventListener('click', () => {
-    scentBlock.classList.toggle('is-open');
+    if (scentBlock.classList.contains('is-open')) {
+      closeList();
+    } else {
+      openList();
+    }
   });
 
   options.forEach((option) => {
@@ -155,14 +172,21 @@ document.querySelectorAll('.product__scent').forEach((scentBlock) => {
       toggle.textContent = `Запах: ${scent}`;
       product.dataset.scent = scent;
       updateOrderText(product);
-      scentBlock.classList.remove('is-open'); // список закрывается сам после выбора
+      closeList(); // список закрывается сам после выбора
     });
   });
 
   // Клик мимо списка — закрываем, если он открыт
   document.addEventListener('click', (event) => {
     if (!scentBlock.contains(event.target)) {
-      scentBlock.classList.remove('is-open');
+      closeList();
+    }
+  });
+
+  // Esc — закрываем открытый список
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      closeList();
     }
   });
 });
